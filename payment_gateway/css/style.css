@@ -9,7 +9,7 @@
   transition: all .2s linear;
 }
 body{
-  background-image: url(/wp-content/uploads/2022/03/underground-01-scaled.jpg);
+  background-image: url(../../wp-content/uploads/2022/03/underground-01-scaled.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 

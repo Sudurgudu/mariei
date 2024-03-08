@@ -30,7 +30,7 @@
             </div><!--.signup-tab-content-->
 
             <div id="login-tab-content">
-                <form class="login-form" action="../../payment_gateway/index.html" method="get">
+                <form class="login-form" action="../payment_gateway/index.html" method="get">
                     <input type="text" class="input" id="user_login" autocomplete="off" placeholder="Email or Username" required>
                     <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password" required>
                     <input type="checkbox" class="checkbox" id="remember_me">
@@ -67,7 +67,7 @@
             showAlert('success', 'Successfully signed up! Redirecting to the the secure payment gateway. Please Don\'t refresh.');
 
             // Redirect to the next step or perform any other desired action
-			setTimeout(()=>{window.location.href = '../payment_gateway/index.html';},3000)
+			setTimeout(()=>{window.location.href = '../payment_gateway/';},3000)
                     }
 
         function login() {
@@ -79,7 +79,7 @@
             // Check if user exists in localStorage
 
                 showAlert('success', 'Successfully logged in! Redirecting to the the secure payment gateway. Please Don\'t refresh.');
-				setTimeout(()=>{window.location.href = '../payment_gateway/index.html';},3000)
+				setTimeout(()=>{window.location.href = '../payment_gateway/';},3000)
         }
 
         function showAlert(type, message) {
