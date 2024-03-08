@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Cart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://kit.fontawesome.com/8f6c732021.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url('/wp-content/uploads/2022/03/underground-01-scaled.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .modal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal {
+      background-color: white;
+      width: 90%;
+      max-width: 1000px;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .dish-details {
+      flex: 1;
+      padding-right: 20px;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .dish-image {
+      max-width: 266px;
+      height: auto;
+      margin-right: 20px;
+    }
+
+    .dish-info {
+      color: #5f6161;
+      margin-bottom: 10px;
+    }
+
+    .dish-info strong {
+      color: #181818;
+    }
+
+    .dish-info-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .add-ons {
+      flex: 1;
+      padding-left: 20px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+    }
+
+    .add-on {
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 10px;
+      border-radius: 5px;
+      position: relative;
+      flex-direction: column;
+    }
+
+    .add-on:hover {
+      background-color: #e9ecef;
+    }
+
+    .add-on-item {
+      background-color: #f8f8f8;
+      color: #5f6161;
+      padding: 5px 7px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 10px;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .add-on-price {
+      color: #5f6161;
+      margin-top: 5px;
+      margin-left: auto;
+    }
+
+    .add-on-divider {
+      border-top: 1px solid #dee2e6;
+      margin: 20px 0;
+    }
+
+    .add-on-category {
+      color: #5f6161;
+      margin-bottom: 10px;
+    }
+
+    .total {
+      font-weight: bold;
+      color: #181818;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .checkout-btn {
+      background-color: #a23aff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-bottom: 10px;
+      display: block;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background-color: #7b1fc9;
+    }
+
+    .reset-button {
+      background-color: #f6f6f6;
+      color: #000;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: none;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .reset-button::before {
+      content: "<";
+    }
+
+    .dish-name {
+      color: #5f6161;
+      margin-bottom: 10px;
+    }
+
+    .quantity-dropdown {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .quantity-dropdown:hover {
+      border-color: #09a99c;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .cart-items .btn-remove {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .cart-items .btn-remove::before {
+      content: "<";
+    }
+
+    @media (max-width: 767.98px) {
+      .dish-details, .add-ons {
+        padding: 0;
+      }
+
+      .dish-image {
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+
+      .dish-info-container {
+        align-items: flex-start;
+      }
+
+      .add-on {
+        padding: 10px 5px;
+      }
+
+      .add-on-item {
+        position: static;
+        margin-right: 0;
+        margin-top: 5px;
+      }
+
+      .add-on-price {
+        position: static;
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .add-on-item {
+        display: none;
+      }
+
+      .add-on-price {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="modal-container">
+    <div class="modal">
+      <div class="modal-content row">
+        <div class="dish-details col-md-6">
+          <h2 class="dish-name" id="performer_name">Joel Corry</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <img src="image1.jpg" alt="Dish Image" class="dish-image" id="performer_image">
+            </div>
+            <div class="dish-info-container col-md-6">
+              <p class="dish-info"><i class="fa-solid fa-calendar"></i><strong id="performer_date">&nbsp 3/7/2024</strong></p>
+              <p class="dish-info" style="color: #a9aeac;">&nbsp 10:00PM-2:00AM</p>
+              <p class="dish-info" style="color: #a9aeac;">&nbsp Door Opens at 10:00PM</p>
+              <p class="dish-info"><i class="fa-solid fa-location-dot"></i><strong style="color: #a23aff;">&nbsp Mariei Underground</strong></p>
+            </div>
+          </div>
+        </div>
+        <div class="add-ons col-md-6">
+          <div class="reset-button btn-remove" onclick="resetCart()"></div>
+          <div class="add-on-category" style="color: #181818;">Tickets</div>
+          <div class="add-on" onclick="addItem('Gentleman General Admission', 30)">
+            <div style="color: #5f6161;">
+              Gentleman General Admission <span class="add-on-price"><strong>$30.00</strong></span>
+            </div>
+            <span class="add-on-item">+</span>
+          </div>
+          <div class="add-on" onclick="addItem('Ladies General Admission', 30)">
+            <div style="color: #5f6161;">
+              Ladies General Admission <span class="add-on-price"><strong>$30.00</strong></span>
+            </div>
+            <span class="add-on-item">+</span>
+          </div>
+          <div class="add-on-category" style="color: #181818;">Tables and Packages</div>
+          <div class="add-on" onclick="addItem('VIP Table [1 to 10 guests]', 1000)">
+            <div style="color: #5f6161;">
+              VIP Table (1 to 10 guests)<span class="add-on-price"><strong>$1,000.00</strong></span>
+            </div>
+            <span class="add-on-item">+</span>
+          </div>
+          <div class="add-on" onclick="addItem(' VIP Table [1 to 15 guests]', 1500)">
+            <div style="color: #5f6161;">
+              VIP Table (1 to 15 guests) <span class="add-on-price"><strong>$1,500.00</strong></span>
+            </div>
+            <span class="add-on-item">+</span>
+          </div>
+          <div class="add-on-divider"></div>
+          <div id="selected-items" class="cart-items"></div>
+          <div class="total">
+            Total: $<span id="total">0</span>
+          </div>
+          <a href="../login/index.html" class="checkout-btn">Login and Checkout</a>
+          <a href="../../payment_gateway/index.html" class="checkout-btn">Checkout as a Guest</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    let total = 0;
+    let selectedItems = [];
+
+    function addItem(itemName, itemPrice) {
+      const existingItem = selectedItems.find(item => item.name === itemName);
+
+      if (existingItem) {
+        existingItem.quantity++;
+        existingItem.subtotal = existingItem.quantity * itemPrice;
+      } else {
+        const newItem = {
+          name: itemName,
+          price: itemPrice,
+          quantity: 1,
+          subtotal: itemPrice
+        };
+        selectedItems.push(newItem);
+      }
+
+      updateSelectedItems();
+      updateTotal();
+      showResetButton();
+    }
+
+    function updateSelectedItems() {
+      const selectedItemsContainer = document.getElementById('selected-items');
+      selectedItemsContainer.innerHTML = '';
+
+      selectedItems.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `
+          <h4>${item.name}</h4>
+          <div>
+            <label for="quantity">Quantity:</label>
+            <select id="quantity" class="quantity-dropdown" onchange="updateItemQuantity(this, '${item.name}', ${item.price})">
+              ${Array.from({ length: 10 }, (_, i) => i + 1).map(quantity => `<option value="${quantity}" ${quantity === item.quantity ? 'selected' : ''}>${quantity}</option>`).join('')}
+            </select>
+          </div>
+          <div>Subtotal: $<span class="subtotal">${item.subtotal}</span></div>
+        `;
+        selectedItemsContainer.appendChild(itemDiv);
+      });
+    }
+
+    function updateItemQuantity(selectElement, itemName, itemPrice) {
+      const selectedQuantity = parseInt(selectElement.value);
+      const item = selectedItems.find(item => item.name === itemName);
+
+      if (item) {
+        item.quantity = selectedQuantity;
+        item.subtotal = selectedQuantity * itemPrice;
+        updateTotal();
+        updateSelectedItems();
+      }
+    }
+
+    function updateTotal() {
+      total = selectedItems.reduce((acc, item) => acc + item.subtotal, 0);
+      document.getElementById('total').textContent = total;
+    }
+
+    function resetCart() {
+      selectedItems = [];
+      total = 0;
+      updateSelectedItems();
+      updateTotal();
+      hideResetButton();
+    }
+
+    function showResetButton() {
+      const resetButton = document.querySelector('.reset-button');
+      if (selectedItems.length > 0) {
+        resetButton.style.display = 'inline-block';
+      }
+    }
+
+    function hideResetButton() {
+      const resetButton = document.querySelector('.reset-button');
+      resetButton.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

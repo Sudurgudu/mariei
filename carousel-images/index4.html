@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      overflow: hidden;
+    }
+
+    .image-container .image-wrapper {
+      position: relative;
+      margin: 0 20px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 500px;
+      transition: filter 0.3s;
+    }
+
+    .image-container img:hover {
+      filter: brightness(50%);
+    }
+
+    .caption {
+      position: absolute;
+      top: 120px; /* Adjust this value to position the caption above the image */
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 15px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .image-wrapper:hover .caption {
+      opacity: 1;
+    }
+
+    .arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .arrow:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="arrow" id="left-arrow">&#8249;</div>
+    <div class="image-container">
+      <div class="image-wrapper">
+        <img src="image-1.png" alt="Image 1">
+        <div class="caption">Joel Corry @ Caveau</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="image-2.png" alt="Image 2">
+        <div class="caption">Tom Macari<br> @ March 8th</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="image-3.png" alt="Image 3">
+        <div class="caption">Jesse Marco<br>@ March 9</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="image-4.png" alt="Image 4">
+        <div class="caption">Jason Smith<br>@March 14</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="image-5.png" alt="Image 5">
+        <div class="caption">Pisano<br>@March 16</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="image-6.png" alt="Image 6">
+        <div class="caption">Tay James<br>@March 15</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="image-7.png" alt="Image 7">
+        <div class="caption">Marty Rock<br>@March 21</div>
+      </div>
+      <div class="image-wrapper">
+        <img src="image-8.png" alt="Image 8">
+        <div class="caption">DJ Icon<br>@March 22</div>
+      </div>
+    </div>
+    <div class="arrow" id="right-arrow">&#8250;</div>
+  </div>
+  <div id="popup">
+
+  <script>
+    const imageContainer = document.querySelector('.image-container');
+    const images = Array.from(document.querySelectorAll('.image-container img'));
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow');
+    let currentIndex = 0;
+
+    function showImages(start) {
+      images.forEach((img, index) => {
+        if (index >= start && index < start + 4) {
+          img.parentElement.style.display = 'inline-block';
+        } else {
+          img.parentElement.style.display = 'none';
+        }
+      });
+    }
+
+    showImages(0);
+
+    leftArrow.addEventListener('click', () => {
+      currentIndex = (currentIndex - 4 + images.length) % images.length;
+      showImages(currentIndex);
+    });
+
+    rightArrow.addEventListener('click', () => {
+      currentIndex = (currentIndex + 4) % images.length;
+      showImages(currentIndex);
+    });
+  </script>
+</body>
+</html>

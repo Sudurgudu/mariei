@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="placeholder"></div>
+    <center><h1>Please Login/Sign Up to Continue</h1></center>
+
+    <div class="form-wrap">
+        <div class="tabs">
+            <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
+            <h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
+        </div><!--.tabs-->
+
+        <div class="tabs-content">
+            <div id="signup-tab-content" class="active">
+                <form class="signup-form" action="" method="post">
+                    <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email" required>
+                    <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username" required>
+                    <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password" required>
+                    <input type="submit" class="button" value="Sign Up" onclick="signUp()">
+                </form><!--.login-form-->
+                <div class="help-text">
+                    <p>By signing up, you agree to our</p>
+                    <p><a href="#">Terms of service</a></p>
+                </div><!--.help-text-->
+            </div><!--.signup-tab-content-->
+
+            <div id="login-tab-content">
+                <form class="login-form" action="../../payment_gateway/index.html" method="get">
+                    <input type="text" class="input" id="user_login" autocomplete="off" placeholder="Email or Username" required>
+                    <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password" required>
+                    <input type="checkbox" class="checkbox" id="remember_me">
+                    <label for="remember_me">Remember me</label>
+
+                    <input type="submit" class="button" value="Login" onclick="login()">
+                </form><!--.login-form-->
+                <div class="help-text">
+                    <p><a href="#">Forgot your password?</a></p>
+                </div><!--.help-text-->
+            </div><!--.login-tab-content-->
+        </div><!--.tabs-content-->
+    </div><!--.form-wrap-->
+
+    <div id="alert-container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+	<script src="script2.js"></script>
+    <script>
+        function signUp() {
+            event.preventDefault(); // Prevent form submission
+
+            var userEmail = document.getElementById('user_email').value;
+            var userName = document.getElementById('user_name').value;
+            var userPass = document.getElementById('user_pass').value;
+
+            // Store variables in localStorage
+            localStorage.setItem('userEmail', userEmail);
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userPass', userPass);
+
+            showAlert('success', 'Successfully signed up! Redirecting to the the secure payment gateway. Please Don\'t refresh.');
+
+            // Redirect to the next step or perform any other desired action
+			setTimeout(()=>{window.location.href = '../../payment_gateway/index.html';},3000)
+                    }
+
+        function login() {
+            event.preventDefault(); // Prevent form submission
+
+            var userLogin = document.getElementById('user_login').value;
+            var userPass = document.getElementById('user_pass').value;
+
+            // Check if user exists in localStorage
+
+                showAlert('success', 'Successfully logged in! Redirecting to the the secure payment gateway. Please Don\'t refresh.');
+				setTimeout(()=>{window.location.href = '../../payment_gateway/index.html';},3000)
+        }
+
+        function showAlert(type, message) {
+            var alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `;
+
+            // Dismiss the alert after 3 seconds
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

