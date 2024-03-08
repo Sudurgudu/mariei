@@ -14,7 +14,7 @@ input {
 
 body {
   color: #000;
-  background-image: url(/wp-content/uploads/2022/03/underground-01-scaled.jpg);
+  background-image: url(../wp-content/uploads/2022/03/underground-01-scaled.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   font: 16px/26px "Raleway", sans-serif; }
