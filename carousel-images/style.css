@@ -64,3 +64,19 @@
 .arrow:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+@media (max-width: 768px) {
+  .image-container img {
+    max-height: 300px; /* Adjust the max height for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .image-container {
+    width: 100%;
+  }
+
+  .image-container img {
+    max-height: 200px; /* Adjust the max height for phones */
+  }
+}

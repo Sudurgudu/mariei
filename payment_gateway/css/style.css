@@ -14,12 +14,30 @@ body{
   background-repeat: no-repeat;
 
 }
+nav {
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  margin-bottom: 10px; /* Ensure the navbar is on top */
+}
+
+nav img {
+  height: 20px; /* Adjust the height as needed */
+}
+.placeholder{
+  height: 50px;
+}
 .container{
   display: flex;
   justify-content: center;
   align-items: center;
   padding:25px;
   min-height: 100vh;
+  margin-top: 10px;
   /* background: linear-gradient(90deg, #000 60%, #fff 40.1%); */
   
 }
@@ -96,4 +114,14 @@ body{
 
 .container form .submit-btn:hover{
   background: #2ecc71;
+}
+
+@media (max-width: 375px) {
+  /* Styles for phones and smaller screens */
+  .container {
+   width: 100% ; 
+   margin-left: 0;
+   margin-right: 0;
+   padding: 0;
+  }
 }

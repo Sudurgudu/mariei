@@ -12,12 +12,67 @@ a {
 input {
   font: 16px/26px "Raleway", sans-serif; }
 
+/* body {
+  color: #000;
+  background-image: url(../wp-content/uploads/2022/03/underground-01-scaled.jpg) no-repeat center center fixed;
+  background-size: cover;
+} */
+ 
+
 body {
   color: #000;
-  background-image: url(../wp-content/uploads/2022/03/underground-01-scaled.jpg);
+  background: url(../wp-content/uploads/2022/03/underground-01-scaled.jpg) no-repeat center center fixed;
   background-size: cover;
-  background-repeat: no-repeat;
-  font: 16px/26px "Raleway", sans-serif; }
+  font: 16px/26px "Raleway", sans-serif;
+  height: 100vh; /* Set the body height to 100% of the viewport height */
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Stack the content vertically */
+}
+
+@media (max-width: 768px) {
+  /* Styles for tablets and smaller screens */
+  body {
+    background-position: center top; /* Adjust the background position for smaller screens */
+  }
+  .form-wrap {
+    width: 100%; /* Make the form-wrap take up the full width on phones */
+    box-sizing: border-box;
+     /* Include padding and border in the width calculation */
+    margin: 0; /* Remove horizontal margin */
+  }
+}
+
+@media (max-width: 375px) {
+  /* Styles for phones and smaller screens */
+  body {
+    background-position: center top; /* Adjust the background position for smaller screens */
+  }
+
+  .form-wrap {
+    width: 400px; /* Make the form-wrap take up the full width on phones */
+    box-sizing: border-box;
+     /* Include padding and border in the width calculation */
+    margin: 0; /* Remove horizontal margin */
+  }
+}
+
+
+
+nav {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+    padding: 10px;
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* Ensure the navbar is on top */
+  }
+  
+  nav img {
+    height: 40px; /* Adjust the height as needed */
+  }
+
+  
 
   h1{color: #fff;
     text-shadow:

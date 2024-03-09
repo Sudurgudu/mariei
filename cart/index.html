@@ -20,6 +20,19 @@
       background-position: center;
       background-attachment: fixed;
     }
+    nav {
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* Ensure the navbar is on top */
+  }
+  
+  nav img {
+    height: 30px; /* Adjust the height as needed */
+  }
 
     .modal-container {
       position: fixed;
@@ -236,6 +249,9 @@
   </style>
 </head>
 <body>
+  <nav>
+    <img src="../wp-content/uploads/2022/03/UG-Logo-Stack.png" alt="Logo">
+  </nav>
   <div class="modal-container">
     <div class="modal">
       <div class="modal-content row">

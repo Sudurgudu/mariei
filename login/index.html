@@ -4,10 +4,13 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div class="placeholder"></div>
-    <center><h1>Please Login/Sign Up to Continue</h1></center>
+    <nav>
+        <img src="../wp-content/uploads/2022/03/UG-Logo-Stack.png" alt="Logo">
+    </nav>
+    <!-- <h1>Please Login/Sign Up to Continue</h1> -->
 
     <div class="form-wrap">
         <div class="tabs">
@@ -50,7 +53,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
-	<script src="script2.js"></script>
+    <script src="script2.js"></script>
     <script>
         function signUp() {
             event.preventDefault(); // Prevent form submission
@@ -67,8 +70,8 @@
             showAlert('success', 'Successfully signed up! Redirecting to the the secure payment gateway. Please Don\'t refresh.');
 
             // Redirect to the next step or perform any other desired action
-			setTimeout(()=>{window.location.href = '../payment_gateway/';},3000)
-                    }
+            setTimeout(() => { window.location.href = '../payment_gateway/'; }, 3000)
+        }
 
         function login() {
             event.preventDefault(); // Prevent form submission
@@ -78,8 +81,8 @@
 
             // Check if user exists in localStorage
 
-                showAlert('success', 'Successfully logged in! Redirecting to the the secure payment gateway. Please Don\'t refresh.');
-				setTimeout(()=>{window.location.href = '../payment_gateway/';},3000)
+            showAlert('success', 'Successfully logged in! Redirecting to the the secure payment gateway. Please Don\'t refresh.');
+            setTimeout(() => { window.location.href = '../payment_gateway/'; }, 3000)
         }
 
         function showAlert(type, message) {
